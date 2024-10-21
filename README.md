@@ -1,12 +1,12 @@
 # PyArdupilotPlugin
-ArduPilot Plugin python implementation for custom physics engines
+Implementation of the communication protocol between ArduPilot SITL and a physics simulator.
+This project is particularly useful if you want to develop your own simulator and integrate it with ArduPilot.
 
-## Resources:
-ardupilot_gazebo: ArduPilotPlugin.cpp
-https://github.com/ArduPilot/ardupilot_gazebo/blob/main/src/ArduPilotPlugin.cc
+![ArduPilot Simulator Communication Diagram](ardupilot_simulator_comm_diagram.png)
 
-ArduPilot: SIM_GAZEBO.cpp
-https://github.com/ArduPilot/ardupilot/blob/master/libraries/SITL/SIM_Gazebo.cpp
+## Resources
+This communication module has been rewritten in Python, based by the original C++ code from the Gazebo and ArduPilot projects.
 
-ArduPilot JSON SITL interface
-https://github.com/ArduPilot/ardupilot/blob/7a930637e060eda3c030b5307c1e8b350587fef3/libraries/SITL/examples/JSON/readme.md
+- **ardupilot_gazebo**: [ArduPilotPlugin.cpp](https://github.com/ArduPilot/ardupilot_gazebo/blob/main/src/ArduPilotPlugin.cc)
+- **ArduPilot**: [SIM_Gazebo.cpp](https://github.com/ArduPilot/ardupilot/blob/master/libraries/SITL/SIM_Gazebo.cpp)
+- **ArduPilot JSON SITL interface**: [JSON SITL interface](libraries/SITL/examples/JSON/readme.md)

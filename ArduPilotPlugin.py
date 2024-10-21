@@ -7,7 +7,7 @@ import numpy as np
 
 class ArduPilotPlugin:
     SERVO_PACKET_SIZE = 40
-    SERVO_PACKET_MAGIC = 0x481A
+    SERVO_PACKET_MAGIC = 18458
     
     def __init__(self):
 

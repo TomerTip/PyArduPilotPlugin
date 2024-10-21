@@ -1,0 +1,65 @@
+@startuml ardupilot_simulator_communication
+
+skinparam backgroundColor #FFFFFF
+
+skinparam sequence {
+    ArrowColor DarkSlateGray
+    ActorBorderColor DarkSlateGray
+    LifeLineBorderColor DarkSlateGray
+    LifeLineBackgroundColor #E6F3FF
+    ParticipantBorderColor DarkSlateGray
+    ParticipantBackgroundColor #E6FFE6
+    BoxBorderColor DarkSlateGray
+    BoxBackgroundColor #EEEEEE
+}
+
+skinparam actor {
+    BackgroundColor #E6F3FF
+    BorderColor DarkSlateGray
+    FontColor Black
+    FontSize 14
+}
+
+skinparam note {
+    BackgroundColor #FFFACD
+    BorderColor DarkSlateGray
+    FontColor Black
+    FontSize 12
+}
+
+title Communication Protocol between ArduPilot SITL and Physics Simulator
+
+actor ArduPilot as "ArduPilot SITL\n<:airplane:>" 
+actor Simulator as "Simulator\n<:computer:>" 
+
+loop Continuous Exchange (At least 450 Hz)
+
+    ArduPilot -> Simulator : \n<<Send>> PWM message (uint8_t[16])\nUDP Port 9002
+    
+    note right of ArduPilot
+      PWM Message Structure:
+      uint8_t[16] pwms: [...]
+    end note
+    
+    Simulator -> Simulator : <<Process>> Update motors
+
+    Simulator -> ArduPilot : <<Send>> Sensor data (JSON)
+    
+    note left of Simulator
+      JSON Packet Structure:
+      {
+        "timestamp": ... ,
+        "imu": {
+          "gyro": [x,y,z],
+          "accel_body": [x,y,z],
+        },
+        "position": [x,y,z],
+        "quaternion": [w,x,y,z],
+        "velocity": [x,y,z]
+      }
+    end note
+
+    ArduPilot -> ArduPilot : <<Process>> Drone control and PWM calculation
+
+end
+@enduml
